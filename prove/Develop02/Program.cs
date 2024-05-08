@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-class JournalEntry
+
+class Entry
 {
     public string Prompt { get; set; }
     public string Response { get; set; }
@@ -11,11 +12,11 @@ class JournalEntry
 
 class Journal
 {
-    private List<JournalEntry> entries = new List<JournalEntry>();
+    private List<Entry> entries = new List<Entry>();
 
     public void AddEntry(string prompt, string response, DateTime date)
     {
-        var entry = new JournalEntry { Prompt = prompt, Response = response, Date = date };
+        var entry = new Entry { Prompt = prompt, Response = response, Date = date };
         entries.Add(entry);
     }
 
