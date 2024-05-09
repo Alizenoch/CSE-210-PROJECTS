@@ -1,110 +1,119 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
+using Microsoft.VisualBasic;
 
 
-class Entry
+namespace JournalApp
 {
-    public string Prompt { get; set; }
-    public string Response { get; set; }
-    public DateTime Date { get; set; }
-}
-
-class Journal
-{
-    private List<Entry> entries = new List<Entry>();
-
-    public void AddEntry(string prompt, string response, DateTime date)
+    class Program
     {
-        var entry = new Entry { Prompt = prompt, Response = response, Date = date };
-        entries.Add(entry);
-    }
-
-    public void DisplayEntries()
-    {
-        foreach (var entry in entries)
+        static void Main(string[] args)
         {
-            Console.WriteLine($"Date: {entry.Date.ToShortDateString()}");
-            Console.WriteLine($"Prompt: {entry.Prompt}");
-            Console.WriteLine($"Response: {entry.Response}\n");
-        }
-    }
+            // Created a new journal
+            Journal myJournal = new Journal("My Personal Journal");
 
-    public void SaveToFile(string filename)
-    {
-        using (var writer = new StreamWriter(filename))
-        {
-            foreach (var entry in entries)
+            // Added my prompts here
+            List<string>prompts = new List<string>
             {
-                writer.WriteLine($"{entry.Date.ToShortDateString()} | {entry.Prompt} | {entry.Response}");
-            }
-        }
-    }
+                "What did you do in the morning?",
+                "Did you say your prayer today?",
+                "How is the weather?",
+                "Do you have a plan?",
+                "When are you going to take a nap?",
 
-    public void LoadFromFile(string filename)
-    {
-        entries.Clear();
-        using (var reader = new StreamReader(filename))
-        {
-            while (!reader.EndOfStream)
+            };
+
+            while (true)
             {
-                var line = reader.ReadLine();
-                var parts = line.Split(" | ");
-                if (parts.Length == 3 && DateTime.TryParse(parts[0], out DateTime date))
+                Console.WriteLine("1. Write a new entry");
+                Console.WriteLine("2. Display the journal");
+                Console.WriteLine("3. Save the journal to the file");
+                Console.WriteLine("4. Load the journal from the file");
+                Console.WriteLine("5. Exit");
+
+                int choice = int.Parse(Console.ReadLine());
+
+                switch (choice)
                 {
-                    AddEntry(parts[1], parts[2], date);
-                }
-            }
-        }
-    }
-}
+                    case 1: string prompt = prompts[new Random().Next(prompts.Count)];
 
-class Program
-{
-    static void Main()
+                        Console.WriteLine($"Prompt:{prompt}");
+                        Console.Write("Your response:");
+
+                        string response = Console.ReadLine();
+
+                        myJournal.AddEntry(prompt,response);
+
+                        break;
+                     
+                    case 2:
+
+                        myJournal.DisplayEntries(); 
+
+                        break; 
+
+                    case 3: 
+
+                         Console.Write("Enter filename to save");
+                         string saveFilename = Console.ReadLine();
+                         myJournal.SaveToFile(saveFilename);
+                         break;
+                    case 4:
+                        Console.Write("Enter filename to load:" ); 
+                        string loadFilename = Console.ReadLine();
+                        myJournal.LoadFromFile(loadFilename);
+                        break;
+                    case 5: 
+                          Environment.Exist(0);
+                    default:
+                         Console.WriteLine("Invalid choice. try again.");
+                         break;        
+                } 
+            } 
+        }     
+    } 
+                        
+
+    class Journal
     {
-        var myJournal = new Journal();
+        private string _name;
+        private List<Entry> _entries;
 
-        while (true)
+        public Journal (string name)
         {
-            Console.WriteLine("\n1. Write a new entry");
-            Console.WriteLine("2. Display journal entries");
-            Console.WriteLine("3. Save journal to a file");
-            Console.WriteLine("4. Load journal from a file");
-            Console.WriteLine("5. Exit");
-            Console.Write("Enter your choice: ");
-            var choice = Console.ReadLine();
+            _name = name;
+            _entries = new List<Entry>();      
+        }  
+        public void AddEntry(string prompt, string response)
+        {
+            _entries.Add(new Entry(DateTime.Now, prompt, response));
+        }
+    
+       public void DisplayEntries()
+        {
+           Console.WriteLine($"Entries in {_name}:");
+           foreach (var entry in _entries)
 
-            switch (choice)
             {
-                case "1":
-                    Console.Write("Enter a prompt: ");
-                    var prompt = Console.ReadLine();
-                    Console.Write("Enter your response: ");
-                    var response = Console.ReadLine();
-                    Console.Write("Enter the date (YYYY-MM-DD): ");
-                    if (DateTime.TryParse(Console.ReadLine(), out DateTime date))
-                    {
-                        myJournal.AddEntry(prompt, response, date);
-                    }
-                    break;
-                case "2":
-                    myJournal.DisplayEntries();
-                    break;
-                case "3":
-                    Console.Write("Enter the filename to save: ");
-                    myJournal.SaveToFile(Console.ReadLine());
-                    break;
-                case "4":
-                    Console.Write("Enter the filename to load: ");
-                    myJournal.LoadFromFile(Console.ReadLine());
-                    break;
-                case "5":
-                    return;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
+                Console.WriteLine($"{entry.Date}: {entry.Prompt} - {entry.Response}");
+
             }
+        }                     
+        public void SaveToFile(string filename)
+            {
+                // Save to file
+            }
+    class Entry
+    {
+        public DateTime Date { get; } 
+        public string Prompt { get; }
+        public string Response { get; }
+
+        public Entry(DateTime date, string prompt, string response)
+        {
+            Date = date;
+            Prompt = prompt;
+            Response = response;
         }
     }
-}
+}    
