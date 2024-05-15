@@ -1,0 +1,25 @@
+using System; 
+// I created a new file for WritingAssignment here and
+// added the WritingAssignment class 
+// And sett up the inheritance relatieonship with the colon as shown below.
+public class  WritingAssignment : Assignment
+{
+    // Added the member variable below.
+    private string _title;
+
+    // Set up the constructors
+    public WritingAssignment(string studentname, string topic,string title)
+    // now I call the base class
+    :base(studentName, topic)
+    {
+        _title = title;
+    }
+    // I added the GetWritingInformation() method here.
+    public string GetWritingInformation()
+    {
+        // call the getter because _studentName is private in the base class.
+        string studentName = GetStudentName();
+        return $ " title{_title} by {_studentName}";
+    }
+    
+}

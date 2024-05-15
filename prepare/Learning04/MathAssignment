@@ -1,0 +1,28 @@
+using System;
+namespace library_demo;
+
+
+     // This is a new file for MathAssignment
+     // I created a class for MathAssignment and I specified that it inherits from the base class by the colon sign.
+     public class MathAssignment : Assignment
+    {
+        // I added the attributes as private member variables while the other member variables are inherited from
+        // base class.
+        private string _textbookSection;
+        private string _problems;
+        // I created a constructor for the class that accepts all four parameters
+       
+        public MathAssignment(string studentName, string topic, string textbookSection, string problems)  
+        // and called the base class constructor to set the base class attributes that way.
+            :base(studentName, topic)
+        {
+            _textbookSection = textbookSection;
+            _problems = problems;
+        }
+        // I added the GetHomeworkList() method
+        public string GetHomeworkList()
+        {
+            return $ "Section {_textbookSection} Problems {_problems}";
+        }
+    
+    }
