@@ -2,7 +2,7 @@ class Customer
 {
     private string _name;
     private Address _customerAddress;
-    internal static object name;
+    
 
     public static object CustomerAddress { get; internal set; }
 
