@@ -8,7 +8,7 @@ class Program
 
         // Create sample products
 
-        var product1 = new Product("Laptop Dell", 101, 3.50m, 5);
+        var product1 = new Product("Dell laptop", 101, 3.50m, 5);
         var product2 = new Product("Chuwi laptop", 102, 2.75m, 10);
 
         // Create an order
