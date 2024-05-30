@@ -43,6 +43,6 @@ class Order
     public string GetShippingLabel()
     {
         // Create a shipping label with customer name and address.
-        return $"Shipping Label:\n {Customer.name}\n{Customer.CustomerAddress}";
+        return $"Shipping Label:\n {Customer.name}\n{Customer.customerAddress}";
     }
 }
