@@ -14,7 +14,7 @@ class Product
     }
 
     public object name { get; internal set; }
-    public object productID { get; internal set; }
+    
 
     public decimal CalculateTotalCost()
     {
