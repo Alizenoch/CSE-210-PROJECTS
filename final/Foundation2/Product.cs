@@ -1,20 +1,23 @@
 class Product
 {
-    private string Name { get; }
-    private int ProductId { get; }
-    private decimal PricePerUnit { get; }
-    private int Quantity { get; }
+    private string _name;
+    private int _productId; 
+    private decimal _pricePerUnit;
+    private int _quantity;
 
     public Product(string name, int productId, decimal pricePerUnit, int quantity)
     {
-        Name = name;
-        ProductId = productId;
-        PricePerUnit = pricePerUnit;
-        Quantity = quantity;
+        _name = name;
+        _productId = productId;
+        _pricePerUnit = pricePerUnit;
+        _quantity = quantity;
     }
+
+    public object name { get; internal set; }
+    public object productID { get; internal set; }
 
     public decimal CalculateTotalCost()
     {
-        return PricePerUnit * Quantity;
+        return _pricePerUnit * _quantity;
     }
 }

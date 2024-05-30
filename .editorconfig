@@ -5,3 +5,6 @@ dotnet_style_object_initializer = true
 
 # IDE0062: Make local function 'static'
 dotnet_diagnostic.IDE0062.severity = none
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = none
