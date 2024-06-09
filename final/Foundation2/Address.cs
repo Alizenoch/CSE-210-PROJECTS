@@ -1,27 +1,31 @@
-using System;
-using System.Collections.Generic;
 public class Address
 {
+    // attributes...
     private string _street;
     private string _city;
-    private string _state;
+    private string _stateProvince;
     private string _country;
 
+    // constructor to set street, city, state, and country...
     public Address(string street, string city, string state, string country)
     {
         _street = street;
         _city = city;
-        _state = state;
+        _stateProvince = state;
         _country = country;
     }
 
-    public bool IsInUSA()
+    // methods...
+
+    // return true or false depending whether customer lives in the USA or not
+    public string ReturnWhereLive()
     {
-        return _country.Equals("USA", StringComparison.OrdinalIgnoreCase);
+        return _country;
     }
 
-    public override string ToString()
+    // display address
+    public string DisplayAddress()
     {
-        return $"{_street}\n{_city}, {_state}\n{_country}";
+        return $"{_street}\n{_city}\n{_stateProvince}, {_country}";
     }
 }
