@@ -1,23 +1,49 @@
-class Product
+public class Product
 {
-    private string _name;
-    private int _productId; 
-    private decimal _pricePerUnit;
-    private int _quantity;
+    // attributes...
+    private string _nameProduct;
+    private int _idProduct;
+    private float _priceProduct;
+    private int _quantityProduct;
 
-    public Product(string name, int productId, decimal pricePerUnit, int quantity)
+    // constructor to set product name, id, price, and quantity...
+    public Product(string name, int id, float price, int quantity)
     {
-        _name = name;
-        _productId = productId;
-        _pricePerUnit = pricePerUnit;
-        _quantity = quantity;
+        _nameProduct = name;
+        _idProduct = id;
+        _priceProduct = price;
+        _quantityProduct = quantity;
     }
 
-    public object name { get; internal set; }
-    
+    // methods...
 
-    public decimal CalculateTotalCost()
+    // get name
+    public string GetNameProduct()
     {
-        return _pricePerUnit * _quantity;
+        return _nameProduct;
+    }
+
+    // get id
+    public int GetIDProduct()
+    {
+        return _idProduct;
+    }
+
+    // get price
+    public float GetPriceProduct()
+    {
+        return _priceProduct;
+    }
+
+    // get quantity
+    public int GetQuantityProduct()
+    {
+        return _quantityProduct;
+    }
+
+    // calculate real price (price of product + quantity)
+    public float CalculateRealPrice()
+    {
+        return _priceProduct * _quantityProduct;
     }
 }
