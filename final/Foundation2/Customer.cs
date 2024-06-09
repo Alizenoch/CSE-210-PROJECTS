@@ -1,24 +1,45 @@
-class Customer
+public class Customer
 {
-    private string _name;
-    private Address _customerAddress;
-    
+    // attributes...
+    private string _nameCustomer;
+    private Address _addressCustomer;
 
-    public static object CustomerAddress { get; internal set; }
+    private bool _livingInUSA; // store true or false
 
-    public Customer(string name, Address address)
+    // constructor to set customer street, city, state, and country to address constructor...
+    public Customer(string name, string street, string city, string state, string country)
     {
-        _name = name;
-        _customerAddress = address;
+        _nameCustomer = name;
+
+        _addressCustomer = new Address(street, city, state, country); // instance of Address class to call some methods
     }
 
-    public bool LivesInUSA()
+    // methods...
+
+    // get name
+    public string GetNameCustomer()
     {
-        return _customerAddress.IsInUSA();
+        return _nameCustomer;
     }
 
-    public string GetName()
+    // get true if customer lives in USA or false if he/she doesn't
+    public bool GetLivingInUSA()
     {
-        return _name;
+        if (_addressCustomer.ReturnWhereLive() == "USA")
+        {
+            _livingInUSA = true;
+        }
+        else
+        {
+            _livingInUSA = false;
+        }
+
+        return _livingInUSA;
+    }
+
+    // get address from address class
+    public string GetAddress()
+    {
+        return _addressCustomer.DisplayAddress();
     }
 }
